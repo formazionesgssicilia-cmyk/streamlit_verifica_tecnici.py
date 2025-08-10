@@ -152,7 +152,7 @@ if st.button("Esegui verifica"):
 
     # Output finale
     if not errors:
-        st.success(\"✅ Il tuo modulo di presentazione può essere compilato correttamente.\")
+        st.success("✅ Il tuo modulo di presentazione può essere compilato correttamente.")
         # Mostro riepilogo e offro download CSV
         all_entries = [t for cat in CATEGORIES for t in teams_data.get(cat, []) if not (t['nome']==\"\" and t['cognome']==\"\")]
         if all_entries:
