@@ -128,7 +128,7 @@ if st.button("Esegui verifica"):
             tname = None
             for _id, t in ag_list + prime_list:
                 if _id == ov:
-                    tname = f\"{t['cognome']} {t['nome']}\"
+                    tname = f"{t['cognome']} {t['nome']}"
                     break
             errors.append(f"Il tecnico {tname} risulta sia tra Allievi/Giovanissimi sia come prima squadra di base.")
 
@@ -143,7 +143,7 @@ if st.button("Esegui verifica"):
             errors.append(f"{t['cognome']} {t['nome']} in {cat} (prima squadra) ha qualifica E-Level non permessa (Scienze Motorie è ammessa).")
 
     # 4) RT non può coincidere con le prime squadre di Esordienti/Pulcini/Primi Calci/Piccoli Amici
-    rt_id = f\"{rt_cognome.strip().lower()}_{rt_nome.strip().lower()}\"
+    rt_id = f"{rt_cognome.strip().lower()}_{rt_nome.strip().lower()}"
     if rt_cognome.strip() != "" or rt_nome.strip() != "":
         for _id, t in prime_list:
             if rt_id == _id:
