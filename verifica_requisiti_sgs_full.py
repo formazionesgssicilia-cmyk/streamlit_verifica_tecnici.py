@@ -56,7 +56,8 @@ for cat in CATEGORIES:
 
 # Helper per identificare un tecnico
 def id_tecnico(t):
-    return f\"{t['cognome'].strip().lower()}_{t['nome'].strip().lower()}\"
+   return f"{t['cognome'].strip().lower()}_{t['nome'].strip().lower()}"
+
 
 # Funzione per mostrare messaggi di errore in lista
 def mostra_errori(errors):
