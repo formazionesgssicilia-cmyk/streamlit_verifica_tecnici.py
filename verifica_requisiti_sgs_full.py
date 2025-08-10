@@ -92,7 +92,7 @@ if st.button("Esegui verifica"):
 
     for _id, t in ag_list:
         if t["qualifica"] in ["Scienze Motorie", "E-Level"]:
-            errors.append(f\"{t['cognome']} {t['nome']} in {t['categoria']} ha qualifica non permessa ({t['qualifica']}).\")
+            errors.append(f"{t['cognome']} {t['nome']} in {t['categoria']} ha qualifica non permessa ({t['qualifica']}).")
 
 
     # 2) Controllo Esordienti e Pulcini: nessun tecnico (tutte le squadre) può avere Scienze Motorie
@@ -101,7 +101,7 @@ if st.button("Esegui verifica"):
             if t["nome"] == "" and t["cognome"] == "":
                 continue
             if t["qualifica"] == "Scienze Motorie":
-                errors.append(f\"{t['cognome']} {t['nome']} in {cat} ha qualifica Scienze Motorie non permessa.\")
+                errors.append(f"{t['cognome']} {t['nome']} in {cat} ha qualifica Scienze Motorie non permessa.")
 
 
     # 3) Prime squadre di Esordienti, Pulcini, Primi Calci, Piccoli Amici
@@ -112,14 +112,14 @@ if st.button("Esegui verifica"):
             t = teams_data[cat][0]
             # Controllo che la prima squadra sia compilata
             if t["nome"] == "" and t["cognome"] == "":
-                errors.append(f\"Prima squadra di {cat} ha tecnico non compilato.\")
+                errors.append(f"Prima squadra di {cat} ha tecnico non compilato.")
             else:
                 prime_list.append((id_tecnico(t), t))
 
     prime_ids = [x[0] for x in prime_list]
     # 3a) prime squadre devono essere diverse tra loro
     if len(prime_ids) != len(set(prime_ids)):
-        errors.append(\"Le prime squadre delle categorie di base hanno tecnici ripetuti tra loro.\")
+        errors.append("Le prime squadre delle categorie di base hanno tecnici ripetuti tra loro.")
 
     # 3b) prime squadre devono essere diverse da Allievi/Giovanissimi
     overlap = set(prime_ids) & set(ag_ids)
@@ -130,7 +130,7 @@ if st.button("Esegui verifica"):
                 if _id == ov:
                     tname = f\"{t['cognome']} {t['nome']}\"
                     break
-            errors.append(f\"Il tecnico {tname} risulta sia tra Allievi/Giovanissimi sia come prima squadra di base.\")
+            errors.append(f"Il tecnico {tname} risulta sia tra Allievi/Giovanissimi sia come prima squadra di base.")
 
     # 3c) qualifiche prime squadre: Esordienti & Pulcini NON possono avere Scienze Motorie o E-Level;
     # Primi Calci & Piccoli Amici possono avere Scienze Motorie ma NON E-Level.
@@ -138,16 +138,16 @@ if st.button("Esegui verifica"):
         cat = t["categoria"]
         qual = t["qualifica"]
         if cat in ["Esordienti", "Pulcini"] and qual in ["Scienze Motorie", "E-Level"]:
-            errors.append(f\"{t['cognome']} {t['nome']} in {cat} (prima squadra) ha qualifica non permessa ({qual}).\")
+            errors.append(f"{t['cognome']} {t['nome']} in {cat} (prima squadra) ha qualifica non permessa ({qual}).")
         if cat in ["Primi Calci", "Piccoli Amici"] and qual == "E-Level":
-            errors.append(f\"{t['cognome']} {t['nome']} in {cat} (prima squadra) ha qualifica E-Level non permessa (Scienze Motorie è ammessa).\")
+            errors.append(f"{t['cognome']} {t['nome']} in {cat} (prima squadra) ha qualifica E-Level non permessa (Scienze Motorie è ammessa).")
 
     # 4) RT non può coincidere con le prime squadre di Esordienti/Pulcini/Primi Calci/Piccoli Amici
     rt_id = f\"{rt_cognome.strip().lower()}_{rt_nome.strip().lower()}\"
     if rt_cognome.strip() != "" or rt_nome.strip() != "":
         for _id, t in prime_list:
             if rt_id == _id:
-                errors.append(\"Il Responsabile Tecnico non può essere allenatore della prima squadra di Esordienti, Pulcini, Primi Calci o Piccoli Amici.\")
+                errors.append("Il Responsabile Tecnico non può essere allenatore della prima squadra di Esordienti, Pulcini, Primi Calci o Piccoli Amici.")
                 break
 
     # Output finale
