@@ -157,10 +157,10 @@ if st.button("Esegui verifica"):
         all_entries = [t for cat in CATEGORIES for t in teams_data.get(cat, []) if not (t['nome']=="\" and t['cognome']==\"")]
         if all_entries:
             df = pd.DataFrame(all_entries)
-            st.subheader(\"Riepilogo tecnici\") 
+            st.subheader("Riepilogo tecnici") 
             st.dataframe(df)
             csv = df.to_csv(index=False).encode('utf-8')
-            st.download_button(\"Scarica CSV\", csv, file_name=\"tecnici_squadre.csv\", mime='text/csv')
+            st.download_button(\"Scarica CSV\", csv, file_name="tecnici_squadre.csv", mime='text/csv')
     else:
         mostra_errori(errors)
         # Mostra riepilogo per debug
