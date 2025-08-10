@@ -167,7 +167,7 @@ if st.button("Esegui verifica"):
         all_entries = [t for cat in CATEGORIES for t in teams_data.get(cat, [])]
         if all_entries:
             df = pd.DataFrame(all_entries)
-            with st.expander(\"Riepilogo dati inseriti (per debug)\"):
+            with st.expander("Riepilogo dati inseriti (per debug)"):
                 st.dataframe(df)
                 txt = df.to_json(orient='records', force_ascii=False, indent=2)
                 st.code(txt)
